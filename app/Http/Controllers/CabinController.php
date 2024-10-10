@@ -13,7 +13,11 @@ class CabinController extends Controller
     public function index()
     {
         //Get de todas las cabañas
-        return "Hola Mundo";
+        //return "Hola Mundo";
+        $cabin = Cabin::orderBy('name', 'asc')->get();
+
+        return response()->
+            json(['data' => $cabin], 200);
     }
 
     /**
@@ -34,6 +38,8 @@ class CabinController extends Controller
     public function show(Cabin $cabin)
     {
         //Ver cabaña n
+        return response()->
+            json(['data' => $cabin], 200);
     }
 
     /**
@@ -41,7 +47,11 @@ class CabinController extends Controller
      */
     public function update(Request $request, Cabin $cabin)
     {
-        //
+        //actualizar cabaña
+        $cabin->update($request->all());
+
+        return response()->
+            json(['data' => $cabin], 200);
     }
 
     /**

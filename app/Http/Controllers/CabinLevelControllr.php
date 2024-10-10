@@ -12,7 +12,11 @@ class CabinLevelControllr extends Controller
      */
     public function index()
     {
-        //
+        //Get de todos los niveles de cabaña
+        $cabinLevel = CabinLevel::orderBy('name', 'asc')->get();
+
+        return response()->
+            json(['data' => $cabinLevel], 200);
     }
 
     /**
@@ -32,7 +36,9 @@ class CabinLevelControllr extends Controller
      */
     public function show(CabinLevel $cabinLevel)
     {
-        //
+        //Ver nivel de cabaña n
+        return response()->
+            json(['data' => $cabinLevel], 200);
     }
 
     /**
@@ -40,7 +46,11 @@ class CabinLevelControllr extends Controller
      */
     public function update(Request $request, CabinLevel $cabinLevel)
     {
-        //
+        //actualizar nivel de cabaña
+        $cabinLevel->update($request->all());
+
+        return response()->
+            json(['data' => $cabinLevel], 200);
     }
 
     /**

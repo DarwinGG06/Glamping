@@ -12,7 +12,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return "buenas a todos";
+        //Get de todos los servicios
+        //return "buenas a todos";
+        $service = Service::orderBy('name', 'asc')->get();
+
+        return response()->
+            json(['data' => $service], 200);
     }
 
     /**
@@ -32,7 +37,9 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        //Ver servicio n
+        return response()->
+            json(['data' => $service], 200);
     }
 
     /**
@@ -40,7 +47,11 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        //actualizar servicio
+        $service->update($request->all());
+
+        return response()->
+            json(['data' => $service], 200);
     }
 
     /**
