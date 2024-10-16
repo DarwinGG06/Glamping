@@ -20,5 +20,8 @@ Route::apiResource('/service',
     App\Http\Controllers\ServiceController::class);
 
 Route::apiResource('/cabinLevel',
-    App\Http\Controllers\CabinLevelControllr::class);
+    App\Http\Controllers\CabinLevelController::class);
+
+Route::apiResource('/user',
+    App\Http\Controllers\UserController::class);
 
