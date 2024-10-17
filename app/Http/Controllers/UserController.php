@@ -12,7 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::orderBy('name', 'asc')->get();
+
+        return response()->
+            json(['data' => $user], 200);
     }
 
     /**
@@ -39,7 +42,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //Ver cabaña n
+        //Ver usuarios
         return response()->
         json(['data' => $user], 200);
     }
@@ -57,7 +60,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-            //actualizar cabaña
+            //actualizar usuario
             $user->update($request->all());
             return response()->
                 json(['data' => $user], 200);
@@ -68,7 +71,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // borrar cabaña
+        // borrar usuario
         $user->delete();
 
         return response()->

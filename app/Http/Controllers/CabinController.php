@@ -37,7 +37,7 @@ class CabinController extends Controller
      */
     public function show(Cabin $cabin)
     {
-        //Ver cabaña n
+        //Ver cabaña
         return response()->
             json(['data' => $cabin], 200);
     }
