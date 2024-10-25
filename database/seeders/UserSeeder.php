@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name' => "Darwin Gonzalez Granados",
             'email' => "darwingonzalezg@autonoma.edu.co",
             'password' => Hash::make('Hola123'),
+            'type' => "normal",
         ]);
     }
 }

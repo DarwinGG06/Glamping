@@ -4,26 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Cabin;
 use Illuminate\Http\Request;
+use App\Http\Resources\CabinResource;
+use App\Http\Resources\CabinCollection;
+use App\Http\Requests\CabinStoreRequest;
 
 class CabinController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //Get de todas las cabañas
         //return "Hola Mundo";
-        $cabin = Cabin::orderBy('name', 'asc')->get();
+        $sort = $request->input('sort', 'name');
+        $type = $request->input('type', 'asc');
+
+
+        $validSort = ["name", "cabinlevel_id", "capacity"];
+        $validType = ["asc","desc"];
+
+        if(!in_array($sort, $validSort)) {
+            $message = "Invalid sort field: $sort";
+
+            return response()->json(['error' => $message], 400);
+        }
+
+        if(!in_array($type, $validType)) {
+            $message = "Invalid type field: $type";
+
+            return response()->json(['error' => $message], 400);
+        }
+
+        $cabin = Cabin::orderBy($sort, $type)->get();
 
         return response()->
-            json(['data' => $cabin], 200);
+            json([new CabinCollection($cabin)], 200);
+
+            //            json(['data' => CabinResource::collection($cabin)], 200);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CabinStoreRequest $request)
     {
         //crear cabaña
         $cabin = Cabin::create($request->all());
@@ -39,7 +64,7 @@ class CabinController extends Controller
     {
         //Ver cabaña
         return response()->
-            json(['data' => $cabin], 200);
+            json(['data' => new CabinResource($cabin)], 200);
     }
 
     /**

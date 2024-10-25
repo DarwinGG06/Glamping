@@ -15,7 +15,7 @@ class UserController extends Controller
         $user = User::orderBy('name', 'asc')->get();
 
         return response()->
-            json(['data' => $user], 200);
+            json(['data' => $user], status: 200);
     }
 
     /**

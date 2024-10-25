@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CabinLevel;
+use App\Models\Cabin;
 use App\Models\Service;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,12 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
         CabinLevel::factory()->count(10)->create();
+        Cabin::factory()->count(10)->create();
         Service::factory()->count(10)->create();
 
         $this->call([
