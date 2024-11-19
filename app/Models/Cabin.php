@@ -15,6 +15,11 @@ class Cabin extends Model
         return $this->belongsTo(CabinLevel::class, 'cabillevel_id');
     }
 
+    public function services(): BelongsTo
+    {
+        return $this->belongsToMany(Service::class, 'cabin_service', 'cabin_id', 'service_id');
+    }
+
     protected $fillable = [
         'name',
         'cabinlevel_id',

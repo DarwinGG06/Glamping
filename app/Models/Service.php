@@ -9,6 +9,11 @@ class Service extends Model
 {
     use HasFactory;
 
+    public function cabins()
+    {
+        return $this->belongsToMany(Cabin::class, 'cabin_service', 'service_id', 'cabin_id');
+    }
+
     protected $fillable = [
         'name',
     ];

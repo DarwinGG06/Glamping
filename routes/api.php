@@ -16,6 +16,17 @@ Route::get('/buenas/todos',
 Route::apiResource('cabin',
     App\Http\Controllers\CabinController::class);
 
+Route::post('/cabin/{id}/services', [App\Http\Controllers\CabinController::class, 'addServices']);
+
+Route::get('/cabin/{id}/services', function ($id) {
+    $cabin = \App\Models\Cabin::findOrFail($id);
+
+    return response()->json([
+        'message' => 'Servicios asociados a la cabaña.',
+        'data' => $cabin->services, // Devuelve los servicios asociados
+]);
+});
+
 Route::apiResource('/service',
     App\Http\Controllers\ServiceController::class);
 

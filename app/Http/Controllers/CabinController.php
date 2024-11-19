@@ -92,4 +92,27 @@ class CabinController extends Controller
         return response()->
             json(null, 204);
     }
+
+    public function addServices(Request $request, $id)
+    {
+        // Encuentra la cabaña por su ID o lanza un error 404
+        $cabin = Cabin::findOrFail($id);
+
+        // Valida que se envíen servicios y que cada uno exista en la tabla 'services'
+        $validated = $request->validate([
+            'services' => 'required|array',        // Debe ser un array y obligatorio
+            'services.*' => 'exists:services,id', // Cada ID debe existir en 'services'
+        ]);
+
+        // Sincroniza los servicios con la cabaña
+        $cabin->services()->sync($validated['services']);
+
+        // Retorna una respuesta JSON con el mensaje y los servicios asignados
+        return response()->json([
+            'message' => 'Servicios asignados correctamente.',
+            'data' => [
+                'cabin' => $cabin,
+                'services' => $cabin->services, // Incluye los servicios relacionados
+            ]],200);
+    }
 }
