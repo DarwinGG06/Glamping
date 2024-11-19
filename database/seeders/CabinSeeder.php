@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CabinSeeder extends Seeder
 {
@@ -13,5 +13,10 @@ class CabinSeeder extends Seeder
     public function run(): void
     {
         //
+        DB::table('cabins')->insert([
+            'name' => 'Cabaña 1',
+            'cabinlevel_id' => 1,
+            'capacity' => 4,
+        ]);
     }
 }

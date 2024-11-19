@@ -19,6 +19,7 @@ class CabinFactory extends Factory
         return [
             'name' => fake()->streetName(),
             'capacity' => fake()->randomDigit(),
+            'cabinlevel_id' => CabinLevelFactory::inRandomOrder()->first()->id,
         ];
     }
 }

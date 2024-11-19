@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use PHPUnit\TextUI\Configuration\Php;
 
 return new class extends Migration
 {
@@ -16,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name', 40);
             $table->integer('capacity')->unsigned();
-            $table->foreignId('cabinlevel_id'); //nivel FK 
+            $table->foreignId('cabinlevel_id'); //nivel FK
             $table->timestamps();
 
             $table->foreign('cabinlevel_id')
-                ->references ('id')->on('cabin_levels')
+                ->references('id')->on('cabin_levels')
                 ->onUpdate('cascade')
                 ->onUpdate('restrict');
         });

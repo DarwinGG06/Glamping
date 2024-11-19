@@ -12,7 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return response()->json(['data' => $users], 200);
     }
 
     /**
@@ -57,10 +59,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-            //actualizar cabaña
-            $user->update($request->all());
-            return response()->
-                json(['data' => $user], 200);
+        //actualizar cabaña
+        $user->update($request->all());
+
+        return response()->
+            json(['data' => $user], 200);
     }
 
     /**

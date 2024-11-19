@@ -28,7 +28,7 @@ class CabinLevelControllr extends Controller
         $cabinLevel = CabinLevel::create($request->all());
 
         return response()->
-            json(['data' => $cabinLevel], 201);  
+            json(['data' => $cabinLevel], 201);
     }
 
     /**

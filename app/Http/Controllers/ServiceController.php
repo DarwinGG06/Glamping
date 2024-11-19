@@ -29,7 +29,7 @@ class ServiceController extends Controller
         $service = Service::create($request->all());
 
         return response()->
-            json(['data' => $service], 201);  
+            json(['data' => $service], 201);
     }
 
     /**

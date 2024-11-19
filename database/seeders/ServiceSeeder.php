@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; //importante 
+use Illuminate\Support\Facades\DB; //importante
 
 class ServiceSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         DB::table('services')->insert([
-            'name' => "Servicio de limpieza",
+            'name' => 'Servicio de limpieza',
         ]);
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', length: 50)->unique(); //nombre
             $table->text('description')->nullable(); //descripcion  //>nullable() para que sea opcional
-            $table->string('color', length: 6)->default('#FFFFFF');
+            $table->string('color', length: 7)->default('#FFFFFF');
             $table->timestamps();
         });
     }
