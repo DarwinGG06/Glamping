@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CabinLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class CabinFactory extends Factory
         return [
             'name' => fake()->streetName(),
             'capacity' => fake()->randomDigit(),
-            'cabinlevel_id' => CabinLevelFactory::inRandomOrder()->first()->id,
+            // Utiliza el modelo CabinLevel para obtener un registro aleatorio
+            'cabinlevel_id' => CabinLevel::query()->inRandomOrder()->value('id') ?? CabinLevel::factory()->create()->id,
         ];
     }
 }

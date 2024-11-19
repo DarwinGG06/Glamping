@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CabinLevel;
 use App\Models\Service;
 use App\Models\User;
+use App\Models\Cabin;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         CabinLevel::factory()->count(10)->create();
         Service::factory()->count(10)->create();
+        Cabin::factory()->count(10)->create();
 
         $this->call([
             UserSeeder::class,

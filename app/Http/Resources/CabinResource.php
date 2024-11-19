@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use UnhandledMatchError;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,15 +29,18 @@ class CabinResource extends JsonResource
                 break;
         } */
 
-        $level = match ($this->cabinlevel_id) {
+        /*$level = match ($this->cabinlevel_id) {
             1 => 'Aa',
             2 => 'Bb',
             3 => 'Cc',
-        };
+            10 => 'Caso 10',
+            11 => 'Caso 11',
+            default => throw new UnhandledMatchError(),
+        };*/
 
         return [
             'name' => $this->name,
-            'levelLetter' => $level,
+            //'levelLetter' => $level,
             'levelNumber' => $this->cabinlevel_id,
             // 'amount_of_souls' => $this->capacity,
         ];
