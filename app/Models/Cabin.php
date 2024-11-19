@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Cabin extends Model
 {
@@ -12,10 +13,10 @@ class Cabin extends Model
 
     public function cabin_levels(): BelongsTo
     {
-        return $this->belongsTo(CabinLevel::class, 'cabillevel_id');
+        return $this->belongsTo(CabinLevel::class, 'cabinlevel_id');
     }
 
-    public function services(): BelongsTo
+    public function services(): BelongsToMany
     {
         return $this->belongsToMany(Service::class, 'cabin_service', 'cabin_id', 'service_id');
     }

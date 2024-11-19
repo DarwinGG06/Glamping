@@ -19,7 +19,7 @@ Route::apiResource('cabin',
 Route::post('/cabin/{id}/services', [App\Http\Controllers\CabinController::class, 'addServices']);
 
 Route::get('/cabin/{id}/services', function ($id) {
-    $cabin = \App\Models\Cabin::findOrFail($id);
+    $cabin = \App\Models\Cabin:: with('services')->findOrFail($id);
 
     return response()->json([
         'message' => 'Servicios asociados a la cabaña.',
