@@ -27,6 +27,17 @@ Route::get('/cabin/{id}/services', function ($id) {
 ]);
 });
 
+Route::post('/cabin/{id}/users', [App\Http\Controllers\CabinController::class, 'addUsers']);
+
+Route::get('/cabin/{id}/users', function ($id) {
+    $cabin = \App\Models\Cabin:: with('users')->findOrFail($id);
+
+    return response()->json([
+        'message' => 'La reserva del usuario ',
+        'data' => $cabin->users, // Devuelve los usuarios asociados
+]);
+});
+
 Route::apiResource('/service',
     App\Http\Controllers\ServiceController::class);
 

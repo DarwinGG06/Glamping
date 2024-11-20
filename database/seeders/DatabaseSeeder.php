@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             CabinLevelSeeder::class,
             CabinSeeder::class,
             CabinServiceSeeder::class,
+            CabinUserSeeder::class,
         ]);
     }
 }

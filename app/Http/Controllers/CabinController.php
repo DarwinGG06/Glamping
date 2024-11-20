@@ -115,4 +115,32 @@ class CabinController extends Controller
                 'services' => $cabin->services, // Incluye los servicios relacionados
             ]],200);
     }
+
+    public function addUsers(Request $request, $id)
+{
+    // Encuentra la cabaña por su ID o lanza un error 404
+    $cabin = Cabin::findOrFail($id);
+
+    // Valida que se envíen usuarios y que cada uno exista en la tabla 'users'
+    $validated = $request->validate([
+        'users' => 'required|array',        // Debe ser un array y obligatorio
+        'users.*' => 'exists:users,id',    // Cada ID debe existir en la tabla 'users'
+    ]);
+
+    // Sincroniza los usuarios con la cabina (remplaza relaciones existentes)
+    $cabin->users()->sync($validated['users']);
+
+    // Recarga los usuarios relacionados para asegurar la respuesta actualizada
+    $cabin->load('users');
+
+    // Retorna una respuesta JSON con el mensaje y los usuarios asignados
+    return response()->json([
+        'message' => 'Los usuarios han sido reservados correctamente para la cabaña.',
+        'data' => [
+            'cabin_id' => $cabin->id,
+            'users' => $cabin->users, // Incluye los usuarios relacionados
+        ]
+    ], 200);
+}
+
 }
