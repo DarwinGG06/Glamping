@@ -41,7 +41,7 @@ class CabinResource extends JsonResource
         return [
             'name' => $this->name,
             //'levelLetter' => $level,
-            'levelNumber' => $this->cabinlevel_id,
+            'levelNumber' => $this->cabinLevel_id,
             // 'amount_of_souls' => $this->capacity,
             'services' => $this->services->pluck('name'),
 

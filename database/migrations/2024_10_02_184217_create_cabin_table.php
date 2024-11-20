@@ -15,13 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name', 40);
             $table->integer('capacity')->unsigned();
-            $table->foreignId('cabinlevel_id'); //nivel FK
+            $table->foreignId('cabinLevel_id'); //nivel FK
             $table->timestamps();
 
-            $table->foreign('cabinlevel_id')
+            //$table->foreign('cabinlevel_id')->references('id')->on('cabin_levels')->onUpdate('cascade');
+
+            $table->foreign('cabinLevel_id')
                 ->references('id')->on('cabin_levels')
                 ->onUpdate('cascade')
-                ->onUpdate('restrict');
+                ->onUpdate('restrict')
+                ->onDelete('cascade')
+                ->onDelete('restrict');
         });
     }
 

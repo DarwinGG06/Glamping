@@ -13,10 +13,11 @@ Route::get('/hola/locos',
 Route::get('/buenas/todos',
     [App\Http\Controllers\ServiceController::class, 'index']);
 
-Route::apiResource('cabin',
-    App\Http\Controllers\CabinController::class);
+Route::get('cabin',
+    [App\Http\Controllers\CabinController::class, 'index']);
 
-Route::post('/cabin/{id}/services', [App\Http\Controllers\CabinController::class, 'addServices']);
+Route::get('cabin/{id}',
+    [App\Http\Controllers\CabinController::class, 'show']);
 
 Route::get('/cabin/{id}/services', function ($id) {
     $cabin = \App\Models\Cabin:: with('services')->findOrFail($id);
@@ -27,7 +28,6 @@ Route::get('/cabin/{id}/services', function ($id) {
 ]);
 });
 
-Route::post('/cabin/{id}/users', [App\Http\Controllers\CabinController::class, 'addUsers']);
 
 Route::get('/cabin/{id}/users', function ($id) {
     $cabin = \App\Models\Cabin:: with('users')->findOrFail($id);
@@ -38,14 +38,23 @@ Route::get('/cabin/{id}/users', function ($id) {
 ]);
 });
 
-Route::apiResource('/service',
-    App\Http\Controllers\ServiceController::class);
+Route::get('/service',
+    [App\Http\Controllers\ServiceController::class, 'index']);
 
-Route::apiResource('/cabinLevel',
-    App\Http\Controllers\CabinLevelControllr::class);
+Route::get('/service/{id}',
+    [App\Http\Controllers\ServiceController::class, 'show']);
 
-Route::apiResource('/user',
-    App\Http\Controllers\UserController::class);
+Route::get('/cabinLevel',
+    [App\Http\Controllers\CabinLevelControllr::class, 'index']);
+
+Route::get('/cabinLevel/{id}',
+    [App\Http\Controllers\CabinLevelControllr::class, 'show']);
+
+Route::get('/user',
+    [App\Http\Controllers\UserController::class, 'index']);
+
+Route::get('/user/{id}',
+    [App\Http\Controllers\UserController::class, 'show']);
 
 Route::post('/v1/login',
     [App\Http\Controllers\api\v1\AuthController::class,
@@ -58,5 +67,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    // Poner aquí las rutas que requieren autenticación previa
+    Route::apiResource('cabin',
+    App\Http\Controllers\CabinController::class)->except('index', 'show');
+
+    Route::post('/cabin/{id}/services',
+    [App\Http\Controllers\CabinController::class, 'addServices']);
+
+    Route::post('/cabin/{id}/users',
+    [App\Http\Controllers\CabinController::class, 'addUsers']);
+
+    Route::apiResource('/service',
+    App\Http\Controllers\ServiceController::class)->except('index', 'show');
+
+    Route::apiResource('/cabinLevel',
+    App\Http\Controllers\CabinLevelControllr::class)->except('index', 'show');
+
+    Route::apiResource('/user',
+    App\Http\Controllers\UserController::class)->except('index', 'show');
 });

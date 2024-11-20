@@ -52,10 +52,24 @@ class CabinController extends Controller
     public function store(CabinStoreRequest $request)
     {
         //crear cabaña
-        $cabin = Cabin::create($request->all());
+        /* $cabin = Cabin::create($request->all());
 
         return response()->
-            json(['data' => $cabin], 201);
+            json(['data' => $cabin], 201); */
+
+        try{
+            $cabin = new Cabin();
+            $cabin->name = $request->name;
+            $cabin->capacity = $request->capacity;
+            $cabin->cabinLevel_id = $request->cabinLevel_id;
+            $cabin->save();
+
+            return response()->
+                json(['data' => $cabin], 201);
+        }catch(\Exception $e){
+            return response()->
+                json(['data' => $e->getMessage()], 400);
+        }
     }
 
     /**

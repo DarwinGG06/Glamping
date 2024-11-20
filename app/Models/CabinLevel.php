@@ -12,7 +12,7 @@ class CabinLevel extends Model
 
     public function cabins(): HasMany
     {
-        return $this->hasMany(Cabin::class, 'cabinlevel_id');
+        return $this->hasMany(Cabin::class, 'cabinLevel_id');
     }
 
     protected $fillable = [

@@ -11,9 +11,9 @@ class Cabin extends Model
 {
     use HasFactory;
 
-    public function cabin_levels(): BelongsTo
+    public function cabin_level(): BelongsTo
     {
-        return $this->belongsTo(CabinLevel::class, 'cabinlevel_id');
+        return $this->belongsTo(CabinLevel::class, 'cabinLevel_id');
     }
 
     public function services(): BelongsToMany
